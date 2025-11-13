@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Trabalho 1</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Tradutor Visual de Libras</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #0077b6, #90e0ef);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+    }
+    #entrada {
+      padding: 10px;
+      width: 60%;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #03045e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.1em;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #023e8a;
+      transform: scale(1.05);
+    }
+    #resultado {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .sinal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+    .sinal:hover {
+      transform: scale(1.1);
+    }
+    img {
+      width: 150px;
+      border-radius: 10px;
+    }
+    p {
+      margin-top: 8px;
+      font-size: 1em;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>🖐️ Tradutor Visual de Libras</h1>
+  <input id="entrada" placeholder="Digite uma frase... ex: eu gosto de água">
+  <button onclick="traduzir()">Traduzir</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    const gifsLibras = {
+    'eu': 'https://giflibras.wordpress.com/wp-content/uploads/2019/03/eu.gif',
+  'você': 'https://giflibras.wordpress.com/wp-content/uploads/2019/03/vocc3aa.gif',
+  'boanoite': 'https://i.makeagif.com/media/7-02-2018/mH__AE.gif',
+  'água': 'https://giflibras.wordpress.com/wp-content/uploads/2019/03/c381gua.gif',
+  'cachorro': 'https://giflibras.wordpress.com/wp-content/uploads/2019/03/cachorro.gif',
+  'feliz': 'https://link-do-gif-feliz.gif',
+  'casa': 'https://link-do-gif-casa.gif',
+  'euteamo': 'https://i.makeagif.com/media/6-21-2017/0QqsL2.gif',
+  'amor': 'https://i.makeagif.com/media/7-17-2016/uYugbM.gif',
+  'família': 'https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/04/familia-1.gif'
+};
+
+    function traduzir() {
+      const texto = document.getElementById('entrada').value.toLowerCase().split(' ');
+      const resultado = document.getElementById('resultado');
+      resultado.innerHTML = '';
+      texto.forEach(palavra => {
+        const div = document.createElement('div');
+        div.classList.add('sinal');
+        if (gifsLibras[palavra]) {
+          div.innerHTML = `<img src="${gifsLibras[palavra]}" alt="${palavra}"><p>${palavra}</p>`;
+        } else {
+          div.innerHTML = `<p>❌ Sem sinal para "${palavra}"</p>`;
+        }
+        resultado.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
