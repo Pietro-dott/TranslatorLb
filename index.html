@@ -3,142 +3,388 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Trabalho 5(Apresentação)</title>
+    <title>TranslatorLb (Versão Final P/Apresentação)</title>
     
 
   </head>
     
   <body>
   <!DOCTYPE html>
+
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Translator LB</title>
 
 <style>
+
   body {
+
     font-family: Arial, sans-serif;
+
     background-color: #f2f4ff;
+
     margin: 0;
+
     padding: 0;
+
     overflow-x: hidden;
+
   }
+
+  /* ---------- HEADER ----------- */
 
   header {
+
     background-color: #3b5bdb;
+
     padding: 20px;
+
     text-align: center;
+
     color: white;
+
     font-size: 30px;
+
     font-weight: bold;
+
+    position: relative;
+
     letter-spacing: 1px;
+
     box-shadow: 0 3px 6px rgba(0,0,0,0.25);
-    animation: fadeDown 0.7s ease-in-out;
+
   }
 
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
+  /* 3 pontinhos */
+
+  .menuIcon {
+
+    position: absolute;
+
+    right: 20px;
+
+    top: 22px;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    user-select: none;
+
   }
+
+  .menuIcon:hover {
+
+    opacity: 0.8;
+
+  }
+
+  /* -------- MODAL -------- */
+
+  #prodModal {
+
+    display: none;
+
+    position: fixed;
+
+    left: 0; top: 0;
+
+    width: 100%; height: 100%;
+
+    background: rgba(0,0,0,0.55);
+
+    backdrop-filter: blur(2px);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 9999;
+
+  }
+
+  #prodContent {
+
+    background: white;
+
+    padding: 25px;
+
+    width: 85%;
+
+    max-width: 380px;
+
+    border-radius: 14px;
+
+    animation: fadeIn 0.4s ease;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+
+    text-align: center;
+
+  }
+
+  @keyframes fadeIn {
+
+    from { opacity: 0; transform: scale(0.92); }
+
+    to   { opacity: 1; transform: scale(1); }
+
+  }
+
+  #prodContent h2 {
+
+    margin-top: 0;
+
+    color: #3b5bdb;
+
+  }
+
+  #prodContent ul {
+
+    padding: 0;
+
+    list-style: none;
+
+    font-size: 18px;
+
+  }
+
+  #prodContent li {
+
+    padding: 6px 0;
+
+  }
+
+  #closeBtn {
+
+    background: #3b5bdb;
+
+    color: white;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    display: inline-block;
+
+    margin-top: 18px;
+
+  }
+
+  /* ----------- RESTANTE DO LAYOUT ----------- */
 
   .container {
+
     max-width: 900px;
+
     margin: auto;
+
     padding: 20px;
+
   }
 
   .card {
+
     background: white;
+
     padding: 25px;
+
     border-radius: 14px;
+
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
     margin-bottom: 25px;
+
     transition: 0.3s;
-    animation: fadeUp 0.7s ease;
+
   }
 
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.20);
-  }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(25px); }
-    to   { opacity: 1; transform: translateY(0); }
+    transform: translateY(-4px);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.20);
+
   }
 
   input[type="text"] {
-    width: 100%;
-    padding: 14px;
-    font-size: 18px;
-    border: 2px solid #3b5bdb;
-    border-radius: 10px;
-    outline: none;
-    margin-top: 10px;
-    transition: 0.3s;
-  }
 
-  input[type="text"]:focus {
-    box-shadow: 0 0 10px rgba(59,91,219,0.4);
-    border-color: #3b5bdb;
+    width: 100%;
+
+    padding: 14px;
+
+    font-size: 18px;
+
+    border: 2px solid #3b5bdb;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    margin-top: 10px;
+
   }
 
   button {
+
     background-color: #3b5bdb;
+
     color: white;
+
     border: none;
+
     padding: 12px 18px;
+
     font-size: 18px;
+
     border-radius: 10px;
+
     cursor: pointer;
+
     margin-top: 15px;
+
     transition: 0.3s;
+
   }
 
   button:hover {
+
     opacity: 0.9;
+
     transform: scale(1.03);
+
   }
 
   #resultado, #quizArea {
+
     margin-top: 20px;
+
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 15px;
+
   }
 
   .sinal {
+
     text-align: center;
+
     background: #ffffff;
+
     padding: 10px;
+
     border-radius: 10px;
+
     border: 2px solid #3b5bdb;
+
     width: 140px;
-    animation: fadeUp 0.7s ease;
+
   }
 
   .sinal img {
+
     width: 100%;
+
     border-radius: 8px;
+
   }
 
   #quizContainer {
+
     display: none;
+
+    position: relative; 
+
   }
+
+  
+
+  .closeQuizBtn {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 25px;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    opacity: 0.6;
+
+    transition: 0.2s;
+
+  }
+
+  .closeQuizBtn:hover {
+
+    opacity: 1;
+
+  }
+
 </style>
+
 </head>
+
 <body>
 
-<header>Translator LB</header>
+<header>
+
+  Translator LB
+
+  <span class="menuIcon" onclick="openMenu()">⋮</span>
+
+</header>
+
+<div id="prodModal" onclick="closeOutside(event)">
+
+  <div id="prodContent">
+
+    <h2>Produtores</h2>
+
+    <ul>
+
+      <li>Pietro Emanoel</li>
+
+      <li>Alan Douglas</li>
+
+      <li>Rodrigo Ribeiro</li>
+
+      <li>Emmanuel Paulo</li>
+
+      <li>João Luis</li>
+
+      <li>Marco Aurélio</li>
+
+    </ul>
+
+    <span id="closeBtn" onclick="closeMenu()">Fechar</span>
+
+  </div>
+
+</div>
 
 <div class="container">
+
     
-  <!-- TRADUTOR NORMAL -->
+
   <div class="card" id="tradutorContainer">
+
     <h2>🔍 Traduzir palavra ou expressão</h2>
 
     <input type="text" id="entrada" placeholder="Digite para traduzir...">
+
     <button onclick="traduzir()">Traduzir</button>
 
     <div id="resultado"></div>
@@ -146,130 +392,371 @@
     <hr><br>
 
     <button onclick="abrirQuiz()">🎯 Modo Quiz — Teste seus conhecimentos</button>
+
   </div>
 
-  <!-- MODO QUIZ -->
   <div class="card" id="quizContainer">
+
     <h2>📝 Modo Quiz</h2>
-    <p>Adivinhe o significado do gesto mostrado abaixo:</p>
+
+    <span class="closeQuizBtn" onclick="fecharQuiz()">❌</span> 
+
+    <p>Adivinhe o significado do gesto abaixo:</p>
 
     <div id="quizArea"></div>
 
     <input type="text" id="respostaQuiz" placeholder="Digite sua resposta...">
 
     <button onclick="verificarResposta()">Enviar resposta</button>
+
     <button onclick="proximaPergunta()">Próxima pergunta</button>
 
     <br><br>
-    <button onclick="fecharQuiz()">⬅ Voltar ao Tradutor</button>
 
-    <p id="feedback" style="font-size: 18px; font-weight: bold;"></p>
+    <button onclick="fecharQuiz()">⬅ Voltar</button>
+
+    <p id="feedback" style="font-size:18px;font-weight:bold;"></p>
+
   </div>
 
 </div>
 
 <script>
-  /* ----------- EXPRESSÕES COMPLETAS ----------- */
-  const expressoes = {
-    "bom dia": "https://i.makeagif.com/media/6-03-2016/i1lOO2.gif",
-    "boa noite": "https://i.makeagif.com/media/7-02-2018/mH__AE.gif",
-    "eu te amo": "https://i.makeagif.com/media/6-21-2017/0QqsL2.gif"
-  };
 
-  /* ----------- PALAVRAS (BANCO DE DADOS COMPLETO) ----------- */
-  const gifsLibras = {
-    "eu": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/eu.gif",
-    "você": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/vocc3aa.gif",
-    "água": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/c381gua.gif",
-    "cachorro": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/cachorro.gif",
-    "feliz": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Feliz.gif",
-    "casa": "https://link-do-gif-casa.gif",
-    "amor": "https://i.makeagif.com/media/7-17-2016/uYugbM.gif",
-    "família": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/04/familia-1.gif",
+  /* -------- MENU PRODUTORES -------- */
 
-    "calor": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Calor.gif",
-    "bonita": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Bonit@.gif",
-    "caro": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Car@.gif",
-    "coragem": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Coragem.gif",
-    "difícil": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Dificil.gif",
-    "fácil": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Facil.gif",
-    "beber": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Beber.gif"
-  };
+  function openMenu() {
 
-  /* ----------- FUNÇÃO TRADUZIR COM EXPRESSÕES ----------- */
-  function traduzir() {
-    const entrada = document.getElementById("entrada").value.toLowerCase().trim();
-    const resultado = document.getElementById("resultado");
-    resultado.innerHTML = "";
+    document.getElementById("prodModal").style.display = "flex";
 
-    // Expressão completa
-    if (expressoes[entrada]) {
-      resultado.innerHTML = `
-        <div class="sinal">
-          <img src="${expressoes[entrada]}">
-          <p>${entrada}</p>
-        </div>`;
-      return;
-    }
-
-    // Palavras individuais
-    const palavras = entrada.split(" ");
-
-    palavras.forEach(p => {
-      const div = document.createElement("div");
-      div.classList.add("sinal");
-
-      if (gifsLibras[p]) {
-        div.innerHTML = `<img src="${gifsLibras[p]}"><p>${p}</p>`;
-      } else {
-        div.innerHTML = `<p>❌ Não há sinal para "${p}"</p>`;
-      }
-
-      resultado.appendChild(div);
-    });
   }
 
-  /* ----------- MODO QUIZ ----------- */
+  function closeMenu() {
+
+    document.getElementById("prodModal").style.display = "none";
+
+  }
+
+  function closeOutside(e) {
+
+    if (e.target.id === "prodModal") {
+
+      closeMenu();
+
+    }
+
+  }
+
+  
+
+  // URL base para os SINAIS de Março/2021
+
+  const IFPR_URL_BASE = "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/03/";
+
+  
+
+  // URL base para os SINAIS de Agosto/2021
+
+  const IFPR_URL_SINAIS_2021_08 = "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/";
+
+  /* 1. OBJETOS DE TRADUÇÃO */
+
+  
+
+  /* EXPRESSÕES COMPLETAS */
+
+  const expressoes = {
+
+    "bom dia": IFPR_URL_BASE + "bom-dia-gif.gif",
+
+    "por favor": IFPR_URL_BASE + "por-favor-gif.gif",
+
+    "com licença": IFPR_URL_BASE + "por-favor-gif.gif",
+
+    "boa noite": "https://i.makeagif.com/media/7-02-2018/mH__AE.gif",
+
+    "eu te amo": "https://i.makeagif.com/media/6-21-2017/0QqsL2.gif"
+
+  };
+
+  /* PALAVRAS COM SINAL PRÓPRIO */
+
+  const gifsLibras = {
+
+    // Usando links com caminho específico
+
+    "oi": IFPR_URL_BASE + "oi-gif.gif",
+
+    "família": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/04/familia-1.gif",
+
+    
+
+    // Usando links externos
+
+    "eu": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/eu.gif",
+
+    "você": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/vocc3aa.gif",
+
+    "água": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/c381gua.gif",
+
+    "cachorro": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/cachorro.gif",
+
+    "amor": "https://i.makeagif.com/media/7-17-2016/uYugbM.gif",
+
+    "casa": "https://link-do-gif-casa.gif", // Link placeholder
+
+    
+
+    // Usando IFPR_URL_SINAIS_2021_08 para os sinais de Agosto/2021
+
+    "feliz": IFPR_URL_SINAIS_2021_08 + "Feliz.gif",
+
+    "calor": IFPR_URL_SINAIS_2021_08 + "Calor.gif",
+
+    "bonita": IFPR_URL_SINAIS_2021_08 + "Bonit@.gif",
+
+    "caro": IFPR_URL_SINAIS_2021_08 + "Car@.gif",
+
+    "coragem": IFPR_URL_SINAIS_2021_08 + "Coragem.gif",
+
+    "difícil": IFPR_URL_SINAIS_2021_08 + "Dificil.gif",
+
+    "fácil": IFPR_URL_SINAIS_2021_08 + "Facil.gif",
+
+    "beber": IFPR_URL_SINAIS_2021_08 + "Beber.gif"
+
+  };
+
+  let traducoesEncontradas = []; 
+
+  /* FUNÇÃO TRADUZIR (REVISADA - SEM DATILOLOGIA) */
+
+  function traduzir() {
+
+    const entradaOriginal = document.getElementById("entrada").value.toLowerCase().trim();
+
+    const resultado = document.getElementById("resultado");
+
+    resultado.innerHTML = "";
+
+    traducoesEncontradas = []; 
+
+    
+
+    // 1. Limpeza da entrada
+
+    let entradaLimpa = entradaOriginal
+
+                           .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ") 
+
+                           .replace(/\s{2,}/g, " ") 
+
+                           .trim();
+
+    
+
+    if (!entradaLimpa) {
+
+        resultado.innerHTML = "<p>Por favor, digite uma palavra ou frase para traduzir.</p>";
+
+        return;
+
+    }
+
+    
+
+    // --- 2. PRIORIDADE: Busca por EXPRESSÕES ---
+
+    const chavesExpressoes = Object.keys(expressoes).sort((a, b) => b.length - a.length);
+
+    let expressaoEncontrada = false;
+
+    chavesExpressoes.forEach(expressao => {
+
+        // Usa regex para garantir que a correspondência seja exata e não parte de uma palavra maior
+
+        const regex = new RegExp(`\\b${expressao}\\b`, 'g'); 
+
+        if (entradaOriginal.match(regex) && !expressaoEncontrada) {
+
+             // Exibe apenas a primeira expressão completa que corresponder
+
+             traducoesEncontradas.push({
+
+                texto: expressao,
+
+                gif: expressoes[expressao],
+
+                index: 0 
+
+             });
+
+             expressaoEncontrada = true; 
+
+        }
+
+    });
+
+    if (expressaoEncontrada) {
+
+        // Se encontrou uma expressão, exibe e encerra
+
+        exibirResultado();
+
+        return;
+
+    }
+
+    // --- 3. Busca por PALAVRAS INDIVIDUAIS ---
+
+    
+
+    const palavras = entradaLimpa.split(" ").filter(p => p.length > 0); 
+
+    let encontrouPalavra = false;
+
+    
+
+    palavras.forEach(p => {
+
+        if (gifsLibras[p]) {
+
+            // Caso: Palavra tem sinal próprio
+
+            traducoesEncontradas.push({
+
+                texto: p,
+
+                gif: gifsLibras[p],
+
+                index: 0 // Índice não importa muito aqui, pois não haverá soletração
+
+            });
+
+            encontrouPalavra = true;
+
+        }
+
+    });
+
+    // --- 4. Exibição ---
+
+    
+
+    if (!encontrouPalavra && !expressaoEncontrada) {
+
+        resultado.innerHTML = `<p>❌ Não foi encontrado um sinal próprio para "${entradaOriginal}". Esta versão não suporta soletração.</p>`;
+
+    } else {
+
+        exibirResultado();
+
+    }
+
+  }
+
+  function exibirResultado() {
+
+      const resultado = document.getElementById("resultado");
+
+      resultado.innerHTML = ""; // Limpa antes de exibir
+
+      traducoesEncontradas.forEach(item => {
+
+          const div = document.createElement("div");
+
+          div.classList.add("sinal");
+
+          // Como removemos a datilologia, só precisamos exibir o GIF ou a mensagem de erro
+
+          if (item.gif) {
+
+               div.style.width = '140px'; 
+
+               div.style.display = 'block';
+
+               div.innerHTML = `<img src="${item.gif}"><p>${item.texto}</p>`;
+
+          } else {
+
+              // Deve ser capturado antes, mas por segurança
+
+              div.innerHTML = `<p>❌ Erro de link para "${item.texto}"</p>`;
+
+          }
+
+          resultado.appendChild(div);
+
+      });
+
+  }
+
+  /* QUIZ (MANTIDO INALTERADO) */
+
   let palavraAtual = "";
 
   function abrirQuiz() {
+
     document.getElementById("tradutorContainer").style.display = "none";
+
     document.getElementById("quizContainer").style.display = "block";
+
     proximaPergunta();
+
   }
 
   function fecharQuiz() {
+
     document.getElementById("quizContainer").style.display = "none";
+
     document.getElementById("tradutorContainer").style.display = "block";
+
   }
 
   function proximaPergunta() {
+
     const chaves = Object.keys(gifsLibras);
+
     palavraAtual = chaves[Math.floor(Math.random() * chaves.length)];
 
     document.getElementById("quizArea").innerHTML = `
+
       <img src="${gifsLibras[palavraAtual]}" style="width:200px;border-radius:10px;">
+
     `;
 
     document.getElementById("feedback").innerText = "";
+
     document.getElementById("respostaQuiz").value = "";
+
   }
 
   function verificarResposta() {
+
     const resposta = document.getElementById("respostaQuiz").value.toLowerCase().trim();
+
     const feedback = document.getElementById("feedback");
 
     if (resposta === palavraAtual) {
+
       feedback.style.color = "green";
+
       feedback.innerText = "✔ Muito bem! Resposta correta!";
+
     } else {
+
       feedback.style.color = "red";
+
       feedback.innerText = `❌ Errado. O correto é: "${palavraAtual}"`;
+
     }
+
   }
+
 </script>
 
 </body>
+
 </html>
     
   </body>
