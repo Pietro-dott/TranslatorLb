@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Trabalho 1</title>
+    <title>Trabalho 5(Apresentação)</title>
     
 
   </head>
@@ -12,112 +12,263 @@
   <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Tradutor Visual de Libras</title>
-  <style>
-    body {
-      text-align: center;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #0077b6, #90e0ef);
-      color: #fff;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 2.2em;
-      margin-bottom: 20px;
-    }
-    #entrada {
-      padding: 10px;
-      width: 60%;
-      border: none;
-      border-radius: 25px;
-      outline: none;
-      font-size: 1.1em;
-      margin-bottom: 10px;
-    }
-    button {
-      background-color: #03045e;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.1em;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background-color: #023e8a;
-      transform: scale(1.05);
-    }
-    #resultado {
-      margin-top: 30px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-    .sinal {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: rgba(255, 255, 255, 0.2);
-      padding: 10px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
-    }
-    .sinal:hover {
-      transform: scale(1.1);
-    }
-    img {
-      width: 150px;
-      border-radius: 10px;
-    }
-    p {
-      margin-top: 8px;
-      font-size: 1em;
-      color: #fff;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Translator LB</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f4ff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  header {
+    background-color: #3b5bdb;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+    animation: fadeDown 0.7s ease-in-out;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-bottom: 25px;
+    transition: 0.3s;
+    animation: fadeUp 0.7s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.20);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    border: 2px solid #3b5bdb;
+    border-radius: 10px;
+    outline: none;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+
+  input[type="text"]:focus {
+    box-shadow: 0 0 10px rgba(59,91,219,0.4);
+    border-color: #3b5bdb;
+  }
+
+  button {
+    background-color: #3b5bdb;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+
+  #resultado, #quizArea {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .sinal {
+    text-align: center;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #3b5bdb;
+    width: 140px;
+    animation: fadeUp 0.7s ease;
+  }
+
+  .sinal img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  #quizContainer {
+    display: none;
+  }
+</style>
 </head>
 <body>
-  <h1>🖐️ Tradutor Visual de Libras</h1>
-  <input id="entrada" placeholder="Digite uma frase... ex: eu gosto de água">
-  <button onclick="traduzir()">Traduzir</button>
 
-  <div id="resultado"></div>
+<header>Translator LB</header>
 
-  <script>
-    const gifsLibras = {
-    'eu': 'https://giflibras.wordpress.com/wp-content/uploads/2019/03/eu.gif',
-  'você': 'https://giflibras.wordpress.com/wp-content/uploads/2019/03/vocc3aa.gif',
-  'boanoite': 'https://i.makeagif.com/media/7-02-2018/mH__AE.gif',
-  'água': 'https://giflibras.wordpress.com/wp-content/uploads/2019/03/c381gua.gif',
-  'cachorro': 'https://giflibras.wordpress.com/wp-content/uploads/2019/03/cachorro.gif',
-  'feliz': 'https://link-do-gif-feliz.gif',
-  'casa': 'https://link-do-gif-casa.gif',
-  'euteamo': 'https://i.makeagif.com/media/6-21-2017/0QqsL2.gif',
-  'amor': 'https://i.makeagif.com/media/7-17-2016/uYugbM.gif',
-  'família': 'https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/04/familia-1.gif'
-};
+<div class="container">
+    
+  <!-- TRADUTOR NORMAL -->
+  <div class="card" id="tradutorContainer">
+    <h2>🔍 Traduzir palavra ou expressão</h2>
 
-    function traduzir() {
-      const texto = document.getElementById('entrada').value.toLowerCase().split(' ');
-      const resultado = document.getElementById('resultado');
-      resultado.innerHTML = '';
-      texto.forEach(palavra => {
-        const div = document.createElement('div');
-        div.classList.add('sinal');
-        if (gifsLibras[palavra]) {
-          div.innerHTML = `<img src="${gifsLibras[palavra]}" alt="${palavra}"><p>${palavra}</p>`;
-        } else {
-          div.innerHTML = `<p>❌ Sem sinal para "${palavra}"</p>`;
-        }
-        resultado.appendChild(div);
-      });
+    <input type="text" id="entrada" placeholder="Digite para traduzir...">
+    <button onclick="traduzir()">Traduzir</button>
+
+    <div id="resultado"></div>
+
+    <hr><br>
+
+    <button onclick="abrirQuiz()">🎯 Modo Quiz — Teste seus conhecimentos</button>
+  </div>
+
+  <!-- MODO QUIZ -->
+  <div class="card" id="quizContainer">
+    <h2>📝 Modo Quiz</h2>
+    <p>Adivinhe o significado do gesto mostrado abaixo:</p>
+
+    <div id="quizArea"></div>
+
+    <input type="text" id="respostaQuiz" placeholder="Digite sua resposta...">
+
+    <button onclick="verificarResposta()">Enviar resposta</button>
+    <button onclick="proximaPergunta()">Próxima pergunta</button>
+
+    <br><br>
+    <button onclick="fecharQuiz()">⬅ Voltar ao Tradutor</button>
+
+    <p id="feedback" style="font-size: 18px; font-weight: bold;"></p>
+  </div>
+
+</div>
+
+<script>
+  /* ----------- EXPRESSÕES COMPLETAS ----------- */
+  const expressoes = {
+    "bom dia": "https://i.makeagif.com/media/6-03-2016/i1lOO2.gif",
+    "boa noite": "https://i.makeagif.com/media/7-02-2018/mH__AE.gif",
+    "eu te amo": "https://i.makeagif.com/media/6-21-2017/0QqsL2.gif"
+  };
+
+  /* ----------- PALAVRAS (BANCO DE DADOS COMPLETO) ----------- */
+  const gifsLibras = {
+    "eu": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/eu.gif",
+    "você": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/vocc3aa.gif",
+    "água": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/c381gua.gif",
+    "cachorro": "https://giflibras.wordpress.com/wp-content/uploads/2019/03/cachorro.gif",
+    "feliz": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Feliz.gif",
+    "casa": "https://link-do-gif-casa.gif",
+    "amor": "https://i.makeagif.com/media/7-17-2016/uYugbM.gif",
+    "família": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/04/familia-1.gif",
+
+    "calor": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Calor.gif",
+    "bonita": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Bonit@.gif",
+    "caro": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Car@.gif",
+    "coragem": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Coragem.gif",
+    "difícil": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Dificil.gif",
+    "fácil": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Facil.gif",
+    "beber": "https://ifpr.edu.br/umuarama/wp-content/uploads/sites/26/2021/08/Beber.gif"
+  };
+
+  /* ----------- FUNÇÃO TRADUZIR COM EXPRESSÕES ----------- */
+  function traduzir() {
+    const entrada = document.getElementById("entrada").value.toLowerCase().trim();
+    const resultado = document.getElementById("resultado");
+    resultado.innerHTML = "";
+
+    // Expressão completa
+    if (expressoes[entrada]) {
+      resultado.innerHTML = `
+        <div class="sinal">
+          <img src="${expressoes[entrada]}">
+          <p>${entrada}</p>
+        </div>`;
+      return;
     }
-  </script>
+
+    // Palavras individuais
+    const palavras = entrada.split(" ");
+
+    palavras.forEach(p => {
+      const div = document.createElement("div");
+      div.classList.add("sinal");
+
+      if (gifsLibras[p]) {
+        div.innerHTML = `<img src="${gifsLibras[p]}"><p>${p}</p>`;
+      } else {
+        div.innerHTML = `<p>❌ Não há sinal para "${p}"</p>`;
+      }
+
+      resultado.appendChild(div);
+    });
+  }
+
+  /* ----------- MODO QUIZ ----------- */
+  let palavraAtual = "";
+
+  function abrirQuiz() {
+    document.getElementById("tradutorContainer").style.display = "none";
+    document.getElementById("quizContainer").style.display = "block";
+    proximaPergunta();
+  }
+
+  function fecharQuiz() {
+    document.getElementById("quizContainer").style.display = "none";
+    document.getElementById("tradutorContainer").style.display = "block";
+  }
+
+  function proximaPergunta() {
+    const chaves = Object.keys(gifsLibras);
+    palavraAtual = chaves[Math.floor(Math.random() * chaves.length)];
+
+    document.getElementById("quizArea").innerHTML = `
+      <img src="${gifsLibras[palavraAtual]}" style="width:200px;border-radius:10px;">
+    `;
+
+    document.getElementById("feedback").innerText = "";
+    document.getElementById("respostaQuiz").value = "";
+  }
+
+  function verificarResposta() {
+    const resposta = document.getElementById("respostaQuiz").value.toLowerCase().trim();
+    const feedback = document.getElementById("feedback");
+
+    if (resposta === palavraAtual) {
+      feedback.style.color = "green";
+      feedback.innerText = "✔ Muito bem! Resposta correta!";
+    } else {
+      feedback.style.color = "red";
+      feedback.innerText = `❌ Errado. O correto é: "${palavraAtual}"`;
+    }
+  }
+</script>
+
 </body>
 </html>
     
